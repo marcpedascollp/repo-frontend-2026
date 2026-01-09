@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fetch GET - 5 Missions</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 920px; margin: 24px auto; padding: 0 12px; }
+    section { border: 1px solid #ddd; border-radius: 12px; padding: 14px; margin: 14px 0; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    input { padding: 10px; min-width: 220px; }
+    button { padding: 10px 14px; cursor: pointer; }
+    .box { background: #111; color: #0f0; padding: 10px; border-radius: 10px; white-space: pre-wrap; min-height: 80px; }
+    ul { padding-left: 18px; }
+    img { max-width: 140px; height: auto; border-radius: 12px; border: 1px solid #333; }
+    .muted { opacity: 0.8; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>Fetch GET — 5 Missions</h1>
+  <p class="muted">Fes les missions. Mira consola si alguna cosa peta. (Sí, petarà. I això és aprendre.)</p>
+
+  <section>
+    <h2>Missió 1 — Llistar 5 posts (GET)</h2>
+    <div class="row">
+      <button id="btnPosts">Carregar posts</button>
+    </div>
+    <ul id="postsList"></ul>
+  </section>
+
+  <section>
+    <h2>Missió 2 — Buscar usuari per ID (GET)</h2>
+    <div class="row">
+      <input id="userId" type="number" min="1" placeholder="Ex: 3" />
+      <button id="btnUser">Buscar usuari</button>
+    </div>
+    <div id="userBox" class="box"></div>
+  </section>
+
+  <section>
+    <h2>Missió 3 — Buscar Pokémon per nom (GET)</h2>
+    <div class="row">
+      <input id="pokeName" placeholder="Ex: pikachu" />
+      <button id="btnPoke">Buscar Pokémon</button>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <img id="pokeImg" alt="Pokemon" />
+      <div id="pokeBox" class="box" style="flex:1;"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Missió 4 — Meteo d’Andorra la Vella (GET)</h2>
+    <div class="row">
+      <button id="btnMeteo">Carregar meteo</button>
+    </div>
+    <div id="meteoBox" class="box"></div>
+    <p class="muted">Pista: mostra temperatura i hora actual (o el que trobis fàcil).</p>
+  </section>
+
+  <section>
+    <h2>Missió 5 — Perfil GitHub per username (GET)</h2>
+    <div class="row">
+      <input id="ghUser" placeholder="Ex: torvalds" />
+      <button id="btnGh">Buscar GitHub</button>
+    </div>
+    <div class="row" style="margin-top:10px;">
+      <img id="ghImg" alt="Avatar GitHub" />
+      <div id="ghBox" class="box" style="flex:1;"></div>
+    </div>
+  </section>
+
+  <script src="./app.js"></script>
+</body>
+</html>
