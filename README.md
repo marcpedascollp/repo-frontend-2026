@@ -1,6 +1,6 @@
 # Projectes de Frontend — Aixovall
 
-👨‍🎓 **Nom:** Kim Garcia
+👨‍🎓 **Nom:** Marc Pedascoll
 🏫 **Centre:** Escola d’Aixovall
 🎓 **Cicle:** TSDP – Tècnic de Suport en Desenvolupament de Programari
 📚 **Mòdul:** Desenvolupament Frontend (UI / UX / JavaScript)
