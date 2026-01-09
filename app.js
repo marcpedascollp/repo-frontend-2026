@@ -1,5 +1,5 @@
 // APIs (totes són GET)
-const API_POSTS = "<https://jsonplaceholder.typicode.com/posts?_limit=5>";
+const API_POSTS = "https://jsonplaceholder.typicode.com/posts?_limit=5";
 const API_USER = (id) => `https://jsonplaceholder.typicode.com/users/${id}`;
 const API_POKE = (name) => `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`;
 const API_METEO = "<https://api.open-meteo.com/v1/forecast?latitude=42.5078&longitude=1.5211&current=temperature_2m,is_day&timezone=Europe%2FAndorra>";
@@ -46,12 +46,26 @@ async function getJSON(url) {
    ===================== */
 btnPosts.addEventListener("click", async () => {
   postsList.innerHTML = "";
-  try{}
+
+  try {
+    const posts = await getJSON(API_POSTS);
+
+
+    for (const p of posts) {
+      const li = document.createElement("li");
+      li.textContent = `#${p.id} - ${p.title}`;
+      postsList.appendChild(li);
+    }
+  } catch (e) {
+    const li = document.createElement("li");
+    li.textContent = `Error: ${e.message}`;
+    postsList.appendChild(li);
+  }
+});
   // TODO 1: posa "Carregant..." o neteja la llista
   // TODO 2: fes getJSON(API_POSTS)
   // TODO 3: pinta cada post en un <li> (ex: "#id - title")
   // BONUS: posa el title en negreta i el body en una línia petita
-});
 
 /* ==========================
    MISSIÓ 2 — GET user per ID
