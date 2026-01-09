@@ -62,17 +62,22 @@ btnPosts.addEventListener("click", async () => {
     postsList.appendChild(li);
   }
 });
-  // TODO 1: posa "Carregant..." o neteja la llista
-  // TODO 2: fes getJSON(API_POSTS)
-  // TODO 3: pinta cada post en un <li> (ex: "#id - title")
-  // BONUS: posa el title en negreta i el body en una línia petita
 
 /* ==========================
    MISSIÓ 2 — GET user per ID
    ========================== */
 btnUser.addEventListener("click", async () => {
-  // TODO 1: valida que hi hagi id (>=1). Si no, mostra missatge a userBox i return
-  // TODO 2: userBox = "Carregant..."
+  let inputId = userIdInput.value;
+  console.log(inputId);
+  userIdInput.value="";
+  const textInsideBox = document.createElement("p");
+  if(inputId<=0){
+    textInsideBox.textContent="Heu d'insertar un nombre vàlid."
+  }else {
+    textInsideBox.textContent="Carregant..."
+  }
+  userBox.appendChild(textInsideBox);
+  const get = await getJSON(API_USER(id));
   // TODO 3: fes getJSON(API_USER(id))
   // TODO 4: mostra al userBox: nom, email, ciutat (address.city)
   // BONUS: mostra el JSON sencer amb JSON.stringify(data, null, 2)
