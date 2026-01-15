@@ -42,7 +42,7 @@ async function getJSON(url) {
 }
 
 /* =====================
-   MISSIÓ 1 — GET posts
+  MISSIÓ 1 — GET posts
    ===================== */
 btnPosts.addEventListener("click", async () => {
   postsList.innerHTML = "";
@@ -71,22 +71,38 @@ btnUser.addEventListener("click", async () => {
   console.log(inputId);
   userIdInput.value="";
   const textInsideBox = document.createElement("p");
+  const textInsideBoxNew = document.createElement("p");
   if(inputId<=0){
     textInsideBox.textContent="Heu d'insertar un nombre vàlid."
   }else {
     textInsideBox.textContent="Carregant..."
   }
   userBox.appendChild(textInsideBox);
-  const get = await getJSON(API_USER(id));
-  // TODO 3: fes getJSON(API_USER(id))
-  // TODO 4: mostra al userBox: nom, email, ciutat (address.city)
-  // BONUS: mostra el JSON sencer amb JSON.stringify(data, null, 2)
-});
-
+  userBox.appendChild(textInsideBoxNew);
+  const get = await getJSON(API_USER(inputId));
+  // console.log(get);
+    textInsideBoxNew.textContent=get.name+", "+get.email+", "+get.address.city+".";
+    textInsideBox.textContent=JSON.stringify(get, null, 2);
+  });
 /* =========================
    MISSIÓ 3 — GET Pokémon nom
    ========================= */
 btnPoke.addEventListener("click", async () => {
+  let inputName=pokeNameInput.value;
+  pokeNameInput.value="";
+  if(!!inputName){
+    // console.log(inputName);
+    const pokeText = document.createElement("p");
+    pokeText.textContent="Carregant...";
+    pokeBox.appendChild(pokeText);
+    let data = await getJSON(API_POKE(inputName));
+    console.log(data);
+  } else {
+    pokeImg.src="";
+    const pokeText = document.createElement("p");
+    pokeText.textContent="Heu d'introduïr un nom correcte.";
+    pokeBox.appendChild(pokeText);
+  }
   // TODO 1: valida que hi hagi nom. Si no, missatge i return
   // TODO 2: pokeBox = "Carregant..." i posa una imatge buida (pokeImg.src = "")
   // TODO 3: fes getJSON(API_POKE(name))
