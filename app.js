@@ -146,8 +146,6 @@ btnGh.addEventListener("click", async () => {
     } catch (e){
       ghText.textContent="Usuari no vàlid";
     }
-    
-
   }
   // TODO 1: valida username. Si no, missatge i return
 });
