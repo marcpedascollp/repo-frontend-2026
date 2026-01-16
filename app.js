@@ -2,7 +2,7 @@
 const API_POSTS = "https://jsonplaceholder.typicode.com/posts?_limit=5";
 const API_USER = (id) => `https://jsonplaceholder.typicode.com/users/${id}`;
 const API_POKE = (name) => `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`;
-const API_METEO = "<https://api.open-meteo.com/v1/forecast?latitude=42.5078&longitude=1.5211&current=temperature_2m,is_day&timezone=Europe%2FAndorra>";
+const API_METEO = "https://api.open-meteo.com/v1/forecast?latitude=42.5078&longitude=1.5211&current=temperature_2m,is_day&timezone=Europe%2FAndorra";
 const API_GH = (user) => `https://api.github.com/users/${user}`;
 
 // Elements Missió 1
@@ -97,36 +97,57 @@ btnPoke.addEventListener("click", async () => {
     pokeBox.appendChild(pokeText);
     let data = await getJSON(API_POKE(inputName));
     console.log(data);
+    pokeImg.src=data.sprites.front_shiny;
+    let types = "";
+    // console.log(data.types[0].type.name);
+    for(let i=0;i<data.types.length;i++){
+      let type = data.types[i].type.name+" ";
+      types = types + type;
+    }
+    console.log(types);
+    pokeText.textContent=data.name+", id: "+data.id+", altura: "+data.height+", pes: "+data.weight+", tipus: "+ types;
+    
   } else {
     pokeImg.src="";
     const pokeText = document.createElement("p");
     pokeText.textContent="Heu d'introduïr un nom correcte.";
     pokeBox.appendChild(pokeText);
   }
-  // TODO 1: valida que hi hagi nom. Si no, missatge i return
-  // TODO 2: pokeBox = "Carregant..." i posa una imatge buida (pokeImg.src = "")
-  // TODO 3: fes getJSON(API_POKE(name))
-  // TODO 4: mostra al pokeBox: id, name, height, weight, types (array)
-  // TODO 5: posa la imatge: data.sprites.front_default
 });
-
 /* ==========================
-   MISSIÓ 4 — GET Meteo Andorra
-   ========================== */
+  MISSIÓ 4 — GET Meteo Andorra
+  ========================== */
 btnMeteo.addEventListener("click", async () => {
-  // TODO 1: meteoBox = "Carregant..."
-  // TODO 2: fes getJSON(API_METEO)
-  // TODO 3: del JSON, agafa data.current.temperature_2m i data.current.time
-  // TODO 4: mostra un missatge: "A Andorra la Vella fa X°C (hora: ...)"
+  const meteoText = document.createElement("p");
+  const meteoText2 = document.createElement("p");
+  meteoText.textContent="Carregant..."
+  meteoBox.appendChild(meteoText);
+  let data = await getJSON(API_METEO);
+  console.log(data);
+  meteoText.textContent="Avui fa una temperatura de "+data.current.temperature_2m+"ºC.";
+  meteoText2.textContent=data.current.time;
+  meteoBox.appendChild(meteoText2);
 });
-
 /* =============================
-   MISSIÓ 5 — GET GitHub username
-   ============================= */
+  MISSIÓ 5 — GET GitHub username
+  ============================= */
 btnGh.addEventListener("click", async () => {
+  if (!!ghUserInput){
+    ghText=document.createElement("p");
+    ghText.textContent="Carregant...";
+    ghBox.appendChild(ghText);
+    ghImg.src="";
+    try{
+      let data = await getJSON(API_GH(ghUserInput.value));
+      ghUserInput.value="";
+      console.log(data);
+      ghImg.src=data.avatar_url;
+      ghText.textContent="Login: "+data.login+", name: "+data.name+", public repos: "+data.public_repos+", followers: "+data.followers+"." 
+    } catch (e){
+      ghText.textContent="Usuari no vàlid";
+    }
+    
+
+  }
   // TODO 1: valida username. Si no, missatge i return
-  // TODO 2: ghBox = "Carregant..." i ghImg.src = ""
-  // TODO 3: fes getJSON(API_GH(user))
-  // TODO 4: mostra: login, name, public_repos, followers
-  // TODO 5: posa avatar: data.avatar_url
 });
