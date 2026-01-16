@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Adivina</title>
+
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+    <h1>ENDEVINA EL NÚMERO</h1>
+    <p>El programa selecciona un número aleatori del 1 al 100 (sense decimals!). Series capaç d'adivinar-lo en 10 intents?</p>
+
+    <form class="form">
+      <label for="guessField">Adivina el número: </label>
+      <input type="number" min="1" max="100" required id="guessField" class="guessField">
+      <button type="submit" class="guessSubmit">Intenta</button>
+    </form>
+    <div class="resultParas">
+      <p class="guesses"></p>
+      <p class="lastResult"></p>
+      <p class="lowOrHigh"></p>
+    </div>
+
+    <script>
+      let randomNumber; // TODO 5: Iguala randomNumber a una funció que crei un número random del 1 al 100 sense decimals
+      function getRandomInt() {
+        const minCeiled = Math.ceil(1);
+        const maxFloored = Math.ceil(100);
+        return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+      }
+      randomNumber = getRandomInt();
+      console.log(randomNumber);
+      // TODO 6: Quin tipus de tags html son els seguents elements?
+      const guesses = document.querySelector('.guesses');         // Ex. Tipus: <p>
+      const lastResult = document.querySelector('.lastResult');   // Tipus: 
+      const lowOrHigh = document.querySelector('.lowOrHigh');     // Tipus:
+      const guessField = document.querySelector('.guessField');   // Tipus:
+      const guessSubmit = document.querySelector('.guessSubmit'); // Tipus:
+
+      // TODO 7: Crea dues variables amb valors no constants amb els seguents nom: guessCount & resetButton
+
+      // TODO 8: Inicialitza la variable guessCount en 1
+
+      function checkGuess() {
+        // TODO 9: Crea una nova variable anomenada userGuess que contingui el valor de l'input 
+        // Assegurat que es un número
+
+        if (guessCount === 1) {
+          guesses.textContent = 'Llistat de números dits: ';
+        }
+
+        // TODO 10: Modifica la seguent linea i fes servir template literal: 
+        // Ex. `${variabel} ${variable}`
+        guesses.textContent = guesses.textContent + ' ' + userGuess;
+
+        // TODO 11: Comproba si el valor introduit per l'usuari es igual al número random generat pel programa
+        // Substitueix true per la condició demanada
+        if (true) { 
+          lastResult.textContent = ''; // TODO 12: Posa un missatge adient per l'usuari segons el resultat actual
+          lastResult.style.backgroundColor = ''; // TODO 13: Posa un color adient segons el resultat actual
+          lowOrHigh.textContent = '';
+          // TODO 14: Truca a la funció gameOver si ho creus convenient
+        } else if (true) { // TODO 15: Comproba si l'usuari ha fet 10 intents (substitueix true per la condició)
+          lastResult.textContent = ''; // TODO 16: Mostra el missatge adient
+          // TODO 17: Esborra la pista del resultat anterior 
+          // TODO 18: Truca a la funció gameOver si ho creus convenient
+        } else {
+          lastResult.textContent = ''; // TODO 19: Posa un missatge adient per l'usuari segons el resultat actual
+          lastResult.style.backgroundColor = ''; // TODO 20: Posa el color adient segons el resultat actual
+
+          if(userGuess < randomNumber) {
+            lowOrHigh.textContent = '' ; // TODO 21: Posa un missatge adient per l'usuari segons el resultat actual
+          } else if(userGuess > randomNumber) {
+            lowOrHigh.textContent = ''; // TODO 22: Posa un missatge adient per l'usuari segons el resultat actual
+          }
+          // TODO 23: Truca a la funció gameOver si ho creus convenient
+        }
+
+        guessCount = guessCount + 1; // TODO 24: Busca una manera alternativa i més curta d'escriure aquesta linea de codi
+        guessField.value = ''; // TODO 25: Sabries dir-me qué fa aquesta línea de codi?
+        guessField.focus(); // TODO 26: Sabries dir-me qué fa aquesta funció de javascript? element.focus()
+      }
+
+      // TODO 27: Al element que te la classname: "guessSubmit", 
+      // afegeix-li un event click que cridi a la funció corresponent
+
+
+      // TODO 28: Aquesta funció tindrà les seguents lineas de codi:
+      function setGameOver() {
+        // 1: desabilita l'input
+        // 2: desabilita el botó de submit
+        // 3: crea un botó de reset per poder començar de nou el joc
+        // 4: modifica el text del botó amb un missatge semblant a: 'Començar un nou joc'
+        // 5: afegeix el botó de reset al final de tot del html
+        // 6: agrega-li un event click que cridi a la funció resetGame
+      }
+
+      function resetGame() {
+        guessCount = 1;
+        const resetParas = document.querySelectorAll('.resultParas p');
+        // TODO 29: Itera l'array que retorna querySelectorAll per tal de esborrar el textContent de cada element. 
+        // fes servir un "for of loop"
+
+        resetButton.parentNode.removeChild(resetButton);
+        guessField.disabled = false;
+        guessSubmit.disabled = false;
+        guessField.value = '';
+        guessField.focus();
+        lastResult.style.backgroundColor = 'white';
+        randomNumber = Math.floor(Math.random() * 100) + 1;
+      }
+
+      // TODO 30: Millora el codi creant una funció que generi un numero random del 0 al 100
+      // i fes-la servir on toqui. 
+    </script>
+
+  <!-- TODO 31: Separa el Javascript en un altre document -->
+  </body>
+</html>
